@@ -4,15 +4,43 @@ import sys
 
  #!                                                         loggin in
 db = None
+setted = False
+while not setted:
+    default_config = (input("Use the default configuration? (Y/N)")).strip()
+    if default_config.lower() == "y":
+        default_config = True
+        setted = True
+    elif default_config.lower() == "n":
+        default_config = False
+        setted = True
+    else:
+        print("Please just put Y or N on the input")
+
 while db is None:
     try:
-        db_password = (input("database password: ")).strip()
-        db = mysql.connect(
-            host="localhost",
-            user="root",
-            password = db_password,
-            database = "Passwords_DB"
-        )
+        if default_config:
+
+            db_password = (input("Database password: ")).strip()
+            db = mysql.connect(
+                host="localhost",
+                user="root",
+                password = db_password,
+                database = "Passwords_DB"
+            )
+
+        else:
+
+            db_name = (input("Database name: ")).strip()
+            db_host = (input("Database host: ")).strip()
+            db_user = (input("Database user: ")).strip()
+            db_password = (input("Database password: ")).strip()
+
+            db = mysql.connect(
+                host="localhost",
+                user="root",
+                password = db_password,
+                database = "Passwords_DB"
+            )
 
     except Exception as e:
         print(f"Something went wrong.\nOr you just typed the wrong password.\n\nLog: {e}")
