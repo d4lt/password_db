@@ -1,5 +1,6 @@
 import mysql.connector as mysql
 import sys
+import getpass as gp
 
 
  #!                                                         loggin in
@@ -20,7 +21,7 @@ while db is None:
     try:
         if default_config:
 
-            db_password = (input("Database password: ")).strip()
+            db_password = (gp.getpass("Database password: ")).strip()
             db = mysql.connect(
                 host="localhost",
                 user="root",
@@ -33,7 +34,7 @@ while db is None:
             db_name = (input("Database name: ")).strip()
             db_host = (input("Database host: ")).strip()
             db_user = (input("Database user: ")).strip()
-            db_password = (input("Database password: ")).strip()
+            db_password = (gp.getpass("Database password: ")).strip()
 
             db = mysql.connect(
                 host="localhost",
